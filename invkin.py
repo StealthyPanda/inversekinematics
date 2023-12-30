@@ -1,3 +1,6 @@
+from math import cos, sin, pi
+
+
 def descent(func, params, cost, n = 100, delta = pow(10, -5), threshold = pow(10, -3), k = 0.01):
     original = cost(func(params))
     descended = params + []
@@ -12,11 +15,9 @@ def descent(func, params, cost, n = 100, delta = pow(10, -5), threshold = pow(10
             descended[each] += vect[each]
             original = cost(func(descended))
         if cost(func(descended)) <= threshold: return descended
-    return descended
 
 
 
-from math import cos, sin, pi
 def position(radii, thetas):
     x, y = 0, 0
     for each in range(len(radii)):
@@ -27,10 +28,12 @@ def position(radii, thetas):
 def distance(current, target):
     return pow(  pow(current[0] - target[0], 2) + pow(current[1] - target[1], 2)  , 0.5)
 
-targetp = (0.24, 0.085)
-rs = [1, 0.5, 0.7, 0.2]
 
-breh = (descent(lambda x: position(rs, x), [-0.6342203747384803, -0.45705114207042474, 1.8146139780661765, 0], lambda x: distance(x, targetp), 100000000, k = 0.01))
-print('Angles:',breh)
-print(position(rs, breh))
-print(distance(position(rs, breh), targetp))
+if __name__ == '__main__':
+    targetp = (-1.1, 2.89)
+    rs = [1, 0.5, 0.7, 0.2]
+
+    breh = (descent(lambda x: position(rs, x), [-0.6342203747384803, -0.45705114207042474, 1.8146139780661765, 0], lambda x: distance(x, targetp), 100000000, k = 0.01))
+    print('Angles:',breh)
+    print(position(rs, breh))
+    print(distance(position(rs, breh), targetp))
